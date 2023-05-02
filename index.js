@@ -19,6 +19,19 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  try {
+    res.setHeader("Content-Type", "text/html");
+    res
+      .status(200)
+      .send(
+        "<h2>Welcome to homepage of backend api </h2><ul><li>POSTS:Api/posts</li> <li>users/registser</li><li>users/login</li></ul>"
+      );
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
 app.use("/users", userRouter);
 
 app.use("/posts", postRouter);
